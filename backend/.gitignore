@@ -14,10 +14,6 @@ tmp/
 # Target directory
 target/
 
-# Logs
-logs
-*.log
-
 # Maven specific files
 .mvn/*
 !.mvn/wrapper

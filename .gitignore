@@ -2,6 +2,10 @@
 .DS_Store
 Thumbs.db
 
+# Logs
+logs
+*.log
+
 # Other
 *.swp
 *~.nib
