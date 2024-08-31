@@ -9,7 +9,7 @@ KangTechVaultは、Java、VUE、DevOpsに関連する技術を総合的に展示
   Java（Spring Bootフレームワーク）を使用したバックエンドアプリケーション。
   
 - **frontend/**  
-  VUE.jsを使用したフロントエンドアプリケーション。
+  Reactを使用したフロントエンドアプリケーション。
 
 - **devops/**  
   CI/CDパイプラインの設定、DockerおよびKubernetesの構成など、DevOpsに関連するファイル。
