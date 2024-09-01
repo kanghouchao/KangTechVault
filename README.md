@@ -23,7 +23,7 @@ KangTechVaultは、Java、VUE、DevOpsに関連する技術を総合的に展示
 ## 使用技術
 
 - **バックエンド**: Java, Spring Boot
-- **フロントエンド**: VUE.js
+- **フロントエンド**: React
 - **クラウドインフラ**: AWS, Terraform
 - **DevOps**: Docker, Kubernetes, CI/CD
 
