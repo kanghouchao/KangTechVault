@@ -1,18 +1,23 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import HomePage from './pages/HomePage';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
-import AboutPage from './pages/AboutPage';
-import NotFoundPage from './pages/NotFoundPage';
+import HomePage from './pages/HomePage';
+import PrivateRoute from './pages/PrivateRoute';
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="*" element={<NotFoundPage />} />
+        <Route
+          path="/home"
+          element={
+            <PrivateRoute>
+              <HomePage />
+            </PrivateRoute>
+          }
+        />
+        <Route path="*" element={<LoginPage />} /> {/* 默认跳转到登录页面 */}
       </Routes>
     </Router>
   );
