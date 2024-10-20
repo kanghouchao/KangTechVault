@@ -1,8 +1,8 @@
 spring:
-    application:
-        name: Demonstration
-    datasource:
-        driver-class-name: com.mysql.cj.jdbc.Driver
-    jpa:
-        hibernate:
-            ddl-auto: none
+  application:
+    name: Demonstration
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
