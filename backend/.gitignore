@@ -25,3 +25,5 @@ target/
 
 # Ignore generated metadata files
 **/META-INF/**
+
+.env
