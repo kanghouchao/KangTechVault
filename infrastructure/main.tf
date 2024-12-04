@@ -1,30 +1,23 @@
-terraform {
-  cloud {
-    organization = "kanhouchou"
-    workspaces {
-      name = "terraform-aws"
-    }
-  }
+module "vpc" {
+  source = "./modules/vpc"
 
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 4.16"
-    }
-  }
-
-  required_version = ">= 1.2.0"
+  vpc_cidr_block = "10.0.0.0/16"
+  public_subnet_cidr_block = "10.0.1.0/24"
+  private_subnet_cidr_block = "10.0.2.0/24"
 }
 
-provider "aws" {
-  region = "ap-northeast-1"
+module "security_group" {
+  source = "./modules/security_group"
+
+  vpc_id = module.vpc.vpc_id
 }
 
-resource "aws_instance" "app_server" {
-  ami           = "ami-0cab37bd176bb80d3"
+module "instance" {
+  source = "./modules/instance"
+
+  ami           = "ami-0b2cd2a95639e0e5b"
   instance_type = "t2.micro"
-
-  tags = {
-    Name = var.instance_name
-  }
+  key_name      = "kang_from_mac"
+  public_subnet_id = module.vpc.public_subnet_id
+  security_group_id = module.security_group.sg_id
 }
