@@ -1,0 +1,11 @@
+---
+# - name: Install Docker, Docker Compose, and Git
+#   hosts: instance
+#   become: true
+#   roles:
+#     - preparations
+
+- name: Deploy Project
+  hosts: instance
+  roles:
+    - deploy

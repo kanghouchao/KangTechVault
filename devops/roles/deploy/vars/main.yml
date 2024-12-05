@@ -1,0 +1,16 @@
+---
+deploy_repo_url: "https://github.com/kanghouchao/KangTechVault.git"
+
+deploy_repo_branch: "main"
+
+deploy_repo_path: "~/KangTechVault"
+
+deploy_frontend_build_command: "make build"
+
+deploy_backend_build_command: "make build"
+
+deploy_frontend_image_name: "your_frontend_image"
+
+deploy_backend_image_name: "your_backend_image"
+
+deploy_image_tag: "latest"

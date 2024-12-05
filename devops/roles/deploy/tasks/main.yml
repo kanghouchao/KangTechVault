@@ -1,0 +1,8 @@
+---
+- name: Pull code from github
+  ansible.builtin.include_tasks:
+    file: pull_code.yml
+
+- name: Build image
+  ansible.builtin.include_tasks:
+    file: build_images.yml

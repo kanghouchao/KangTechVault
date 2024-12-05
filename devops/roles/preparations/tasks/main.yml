@@ -1,0 +1,26 @@
+---
+- name: Update all packages (Ubuntu)
+  ansible.builtin.apt:
+    update_cache: true
+    upgrade: dist
+
+- name: Install required dependencies for Docker (Ubuntu)
+  ansible.builtin.apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+    state: present
+
+- name: Install git
+  ansible.builtin.include_tasks:
+    file: git.yml
+
+- name: Install make
+  ansible.builtin.include_tasks:
+    file: make.yml
+
+- name: Install docker and docker-compose
+  ansible.builtin.include_tasks:
+    file: docker.yml

@@ -1,0 +1,3 @@
+---
+preparations_system: "{{ ansible_facts['system'] }}"
+preparations_architecture: "{{ ansible_facts['architecture'] }}"

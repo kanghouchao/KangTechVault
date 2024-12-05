@@ -1,0 +1,6 @@
+---
+- name: Install Make
+  ansible.builtin.apt:
+    name:
+      - make
+    state: present

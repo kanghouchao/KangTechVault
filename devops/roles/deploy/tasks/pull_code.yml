@@ -1,0 +1,6 @@
+---
+- name: Clone Git repository
+  ansible.builtin.git:
+    repo: "{{ deploy_repo_url }}"
+    dest: "{{ deploy_repo_path }}"
+    version: "{{ deploy_repo_branch }}"

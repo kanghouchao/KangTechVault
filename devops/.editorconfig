@@ -1,0 +1,50 @@
+# EditorConfig helps maintain consistent coding styles
+# across various editors and IDEs, including VSCode.
+
+# Top-level EditorConfig file
+root = true
+
+# Default settings for all files
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 2
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# YAML files (used in Ansible for playbooks, inventory, etc.)
+[*.yml]
+indent_style = space
+indent_size = 2
+
+[*.yaml]
+indent_style = space
+indent_size = 2
+
+# Jinja2 templates (e.g., for Ansible templates)
+[*.j2]
+indent_style = space
+indent_size = 2
+
+# Python files (for custom Ansible modules or plugins)
+[*.py]
+indent_style = space
+indent_size = 4
+max_line_length = 79  # PEP8 standard for Python
+
+# Markdown files (e.g., README.md or documentation)
+[*.md]
+trim_trailing_whitespace = false  # Allow trailing whitespace in Markdown
+indent_style = space
+indent_size = 2
+
+# JSON files (e.g., for cloud configuration or Ansible Vault in JSON format)
+[*.json]
+indent_style = space
+indent_size = 2
+
+# Shell scripts (e.g., for pre/post task scripts)
+[*.sh]
+indent_style = space
+indent_size = 2
