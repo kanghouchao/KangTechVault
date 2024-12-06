@@ -6,3 +6,7 @@
 - name: Build image
   ansible.builtin.include_tasks:
     file: build_images.yml
+
+- name: Deploy Project
+  ansible.builtin.include_tasks:
+    file: deploy.yml

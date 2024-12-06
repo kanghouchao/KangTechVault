@@ -1,0 +1,24 @@
+---
+- name: Create the folder
+  ansible.builtin.file:
+    path: "{{ deploy_path }}"
+    state: directory
+    mode: '0755'
+
+- name: Copy the docker-compose.yml template to the server
+  ansible.builtin.template:
+    src: docker-compose.yml.j2
+    dest: "{{ deploy_path }}/docker-compose.yml"
+    mode: '0644'
+
+- name: Copy the .env template to the server
+  ansible.builtin.template:
+    src: .env.j2
+    dest: "{{ deploy_path }}/.env"
+    mode: '0644'
+
+- name: Run docker-compose up to start the project
+  community.docker.docker_compose_v2:
+    project_src: "{{ deploy_path }}"
+    state: stopped
+    pull: missing

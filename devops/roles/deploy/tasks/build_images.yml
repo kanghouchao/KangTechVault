@@ -1,4 +1,10 @@
 ---
+- name: Build Docker image for frontend
+  ansible.builtin.command:
+    cmd: "{{ deploy_frontend_build_command }}"
+    chdir: "{{ deploy_repo_path }}/frontend"
+  register: result_backend
+  changed_when: false
 
 - name: Build Docker image for backend
   ansible.builtin.command:
@@ -6,8 +12,3 @@
     chdir: "{{ deploy_repo_path }}/backend"
   register: result_backend
   changed_when: false
-
-- name: Check if backend build was successful
-  ansible.builtin.debug:
-    msg: "Backend build for Java was successful."
-  when: result_backend.rc == 0

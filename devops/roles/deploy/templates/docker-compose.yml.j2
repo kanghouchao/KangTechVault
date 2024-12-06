@@ -13,7 +13,7 @@ services:
       - network
 
   api:
-    image: kang-tech-vault:0.0.1
+    image: {{ deploy_backend_image_name }}:{{ deploy_backend_image_tag }}
     container_name: api
     restart: on-failure
     environment:
@@ -31,7 +31,7 @@ services:
       - network
 
   web:
-    image: kang-tech-vault-web:0.0.1
+    image: {{ deploy_frontend_image_name }}:{{ deploy_frontend_image_tag }}
     container_name: web
     ports:
       - "80:80"

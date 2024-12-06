@@ -9,8 +9,18 @@ deploy_frontend_build_command: "make build"
 
 deploy_backend_build_command: "make build"
 
-deploy_frontend_image_name: "your_frontend_image"
+deploy_frontend_image_name: "kang-tech-vault-web"
 
-deploy_backend_image_name: "your_backend_image"
+deploy_backend_image_name: "kang-tech-vault-api"
 
-deploy_image_tag: "latest"
+deploy_frontend_image_tag: "0.0.1"
+
+deploy_backend_image_tag: "0.0.1"
+
+deploy_path: "~/deploy"
+
+deploy_mysql_database: "vault"
+
+deploy_mysql_username: "kang"
+
+deploy_profile: "dev"
