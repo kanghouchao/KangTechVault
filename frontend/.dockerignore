@@ -1,0 +1,13 @@
+# Ignore.editorconfig
+.editorconfig
+
+# Ignore all markdown files (md)
+*.md
+
+node_modules
+
+build
+
+.gitignore
+
+Makefile

@@ -1,7 +1,7 @@
 services:
-  mysql:
+  db:
     image: mysql:8.4.2
-    container_name: mysql
+    container_name: db
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
@@ -9,27 +9,42 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     volumes:
       - mysql_data:/var/lib/mysql
+    networks:
+      - network
 
-  KangTechVault:
+  api:
     image: kang-tech-vault:0.0.1
-    container_name: vault
+    container_name: api
     restart: on-failure
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/${MYSQL_DATABASE}
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/${MYSQL_DATABASE}
       SPRING_DATASOURCE_USERNAME: ${MYSQL_USER}
       SPRING_DATASOURCE_PASSWORD: ${MYSQL_PASSWORD}
       SPRING_PROFILES_ACTIVE: ${ENV_NAME}
     ports:
       - "8080:8080"
     depends_on:
-      - mysql
+      - db
     volumes:
       - vault_logs:/kanghouchao/logs
+    networks:
+      - network
+
+  web:
+    image: kang-tech-vault-web:0.0.1
+    container_name: web
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - api
+    networks:
+      - network
 
 volumes:
   mysql_data:
   vault_logs:
 
 networks:
-  vault_network:
+  network:
     driver: bridge
