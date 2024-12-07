@@ -1,8 +1,10 @@
 spring:
-  liquibase:
-    drop-first: true
   jpa:
     show-sql: true
     properties:
       hibernate:
         format_sql: true
+  datasource:
+    password: 3bQv7XyT
+    username: kang
+    url: jdbc:mysql://localhost:3306/vault

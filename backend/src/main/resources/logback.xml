@@ -19,6 +19,8 @@
   </appender>
 
   <logger name="com.kang.demonstration" level="DEBUG"/>
+  <logger name="org.springframework.security" level="DEBUG"/>
+  <logger name="org.springframework.web" level="DEBUG"/>
 
   <root level="INFO">
     <appender-ref ref="STDOUT"/>
