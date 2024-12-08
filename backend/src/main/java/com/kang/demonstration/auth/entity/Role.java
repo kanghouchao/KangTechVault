@@ -6,7 +6,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * @author kanghouchao
@@ -14,7 +13,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @Table(name = "roles")
-@NoArgsConstructor(force = true)
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
