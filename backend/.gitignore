@@ -27,4 +27,4 @@ target/
 **/META-INF/**
 
 # Ignore dev settings
-application-dev.yaml
+application-**.yaml
