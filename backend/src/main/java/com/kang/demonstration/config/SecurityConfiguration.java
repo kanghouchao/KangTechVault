@@ -31,7 +31,7 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        String[] allowedPaths = {"/auth/login", "/auth/logout", "/auth/register", "/error"};
+        String[] allowedPaths = {"/register/**", "/login/**", "/error"};
         http
             .csrf(csrf -> csrf
                 .ignoringRequestMatchers("/**")

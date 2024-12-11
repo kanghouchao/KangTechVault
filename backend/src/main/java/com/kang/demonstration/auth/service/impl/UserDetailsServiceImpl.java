@@ -1,8 +1,7 @@
 package com.kang.demonstration.auth.service.impl;
 
-import com.kang.demonstration.auth.entity.User;
 import com.kang.demonstration.auth.repository.UserRepository;
-import com.kang.demonstration.auth.service.AccountService;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,11 +13,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @AllArgsConstructor
-public class AccountServiceImpl implements UserDetailsService, AccountService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final UserRepository userRepository;
 
     @Override
+    @Transactional
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         UserDetails user = this.userRepository.getUserByEmail(email);
         if (user == null) {
@@ -27,8 +27,4 @@ public class AccountServiceImpl implements UserDetailsService, AccountService {
         return user;
     }
 
-    @Override
-    public Long save(User user) {
-        return this.userRepository.save(user).getId();
-    }
 }

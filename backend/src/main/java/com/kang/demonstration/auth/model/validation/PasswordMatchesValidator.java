@@ -1,16 +1,16 @@
 package com.kang.demonstration.auth.model.validation;
 
-import com.kang.demonstration.auth.model.RegisterRequest;
+import com.kang.demonstration.auth.model.PasswordSettingRequest;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
 /**
  * @author kanghouchao
  */
-public class PasswordMatchesValidator implements ConstraintValidator<SamePassword, RegisterRequest> {
+public class PasswordMatchesValidator implements ConstraintValidator<SamePassword, PasswordSettingRequest> {
 
     @Override
-    public boolean isValid(RegisterRequest request, ConstraintValidatorContext context) {
+    public boolean isValid(PasswordSettingRequest request, ConstraintValidatorContext context) {
         if (request == null) {
             return false;
         }

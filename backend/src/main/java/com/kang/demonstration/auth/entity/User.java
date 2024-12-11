@@ -10,6 +10,7 @@ import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -25,14 +26,41 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 50, nullable = false)
+    @Column(nullable = false)
+    private String nickname;
+
+    @Column(nullable = false)
+    private String password;
+
+    @Column(unique = true)
     private String email;
 
-    @Column(length = 60, nullable = false)
-    private String password;
+    @Column(nullable = false)
+    private boolean isActive = true;
+
+    @Column(nullable = false)
+    private boolean isAccountNonExpired = true;
+
+    @Column(nullable = false)
+    private boolean isAccountNonLocked = true;
+
+    @Column(nullable = false)
+    private boolean isCredentialsNonExpired = true;
+
+    @Column(nullable = false)
+    private boolean isEnabled = true;
+
+    @Column(nullable = false)
+    private boolean isEmailVerified = false;
+
+    @Column(updatable = false)
+    private LocalDateTime createdAt;
+
+    private LocalDateTime updatedAt;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+        //TODO should return real authorities
         return List.of();
     }
 

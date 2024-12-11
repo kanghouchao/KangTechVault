@@ -1,0 +1,55 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: kanghouchao
+      changes:
+        - createTable:
+            tableName: email_verification_tokens
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: email
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: token
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: request_time
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: expiration_time
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_used
+                  type: BOOLEAN
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+        - addUniqueConstraint:
+            columnNames: token
+            tableName: email_verification_tokens
+            constraintName: uq_token
+  - changeSet:
+      id: 2
+      author: kanghouchao
+      changes:
+        - createIndex:
+            indexName: idx_email
+            tableName: email_verification_tokens
+            columns:
+              - column:
+                  name: email
