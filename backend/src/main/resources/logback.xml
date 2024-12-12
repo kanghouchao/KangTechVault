@@ -1,16 +1,16 @@
 <configuration>
   <property name="LOG_PATH" value="logs"/>
 
-  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <file>${LOG_PATH}/demonstration.log</file>
-    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-      <fileNamePattern>${LOG_PATH}/demonstration-%d{yyyy-MM-dd}.log</fileNamePattern>
-      <maxHistory>7</maxHistory>
-    </rollingPolicy>
-    <encoder>
-      <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level [%thread] %logger{36} - %msg%n</pattern>
-    </encoder>
-  </appender>
+<!--  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+<!--    <file>${LOG_PATH}/demonstration.log</file>-->
+<!--    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+<!--      <fileNamePattern>${LOG_PATH}/demonstration-%d{yyyy-MM-dd}.log</fileNamePattern>-->
+<!--      <maxHistory>7</maxHistory>-->
+<!--    </rollingPolicy>-->
+<!--    <encoder>-->
+<!--      <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level [%thread] %logger{36} - %msg%n</pattern>-->
+<!--    </encoder>-->
+<!--  </appender>-->
 
   <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
     <encoder>
@@ -19,10 +19,9 @@
   </appender>
 
   <logger name="com.kang.demonstration" level="DEBUG"/>
-  <logger name="org.springframework.security" level="DEBUG"/>
-  <logger name="org.springframework.web" level="DEBUG"/>
 
   <root level="INFO">
     <appender-ref ref="STDOUT"/>
   </root>
+
 </configuration>

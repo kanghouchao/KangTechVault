@@ -1,6 +1,6 @@
 package com.kang.demonstration.auth.service.impl;
 
-import com.kang.demonstration.auth.service.EmailService;
+import com.kang.demonstration.auth.service.EmailSenderService;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,7 @@ import java.util.Locale;
  */
 @Service
 @RequiredArgsConstructor
-public class JavaEmailSenderService implements EmailService {
+public class EmailSenderSenderService implements EmailSenderService {
 
     @Value("${register.email.verify-baseurl}")
     private String baseURL;

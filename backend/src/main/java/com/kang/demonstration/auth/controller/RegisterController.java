@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Locale;
+
 /**
  * @author kanghouchao
  */
@@ -31,14 +33,9 @@ public class RegisterController {
      * @return response
      */
     @PostMapping("send-email")
-    public ResponseEntity<?> sendEmail(@RequestBody @Valid EmailSenderRequest emailSenderRequest) {
-        try {
-            this.registerService.sendEmail(emailSenderRequest.email());
-        } catch (MessagingException e) {
-            //TODO should do more better
-            log.error(e);
-            return ResponseEntity.internalServerError().build();
-        }
+    public ResponseEntity<?> sendEmail(@RequestBody @Valid EmailSenderRequest emailSenderRequest,
+                                       Locale locale) throws MessagingException {
+        this.registerService.sendEmail(emailSenderRequest.email(), locale);
         return ResponseEntity.ok().build();
     }
 

@@ -7,7 +7,7 @@ import java.util.Locale;
 /**
  * @author kanghouchao
  */
-public interface EmailService {
+public interface EmailSenderService {
 
     /**
      * send email to user

@@ -25,5 +25,5 @@ spring:
     basename: messages
     encoding: UTF-8
   web:
-    locale-resolver: fixed
-    locale: fixed
+    locale-resolver: accept_header
+    locale: ja_JP
