@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.assertj.MockMvcTester;
 
@@ -20,6 +21,7 @@ import java.util.Collections;
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@ActiveProfiles("test")
 class LoginControllerTest {
 
     @Value(value = "${auth.expiration.time-millis}")
@@ -32,10 +34,10 @@ class LoginControllerTest {
     private PasswordEncoder passwordEncoder;
 
     @MockitoBean
-    private JwtUtil jwtUtil;
+    public JwtUtil jwtUtil;
 
     @MockitoBean
-    private UserDetailsService userDetailsService;
+    public UserDetailsService userDetailsService;
 
     // Login TEST
 

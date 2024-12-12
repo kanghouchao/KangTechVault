@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class EmailVerificationTokenServiceImpl implements EmailVerificationTokenService {
 
-    @Value("${register.token.expirationTime}")
+    @Value("${register.token.time}")
     private Long expirationTime = 3600L;
 
     private final EmailVerificationTokenRepository tokenRepository;
@@ -30,6 +30,7 @@ public class EmailVerificationTokenServiceImpl implements EmailVerificationToken
         verificationToken.setEmail(email);
         verificationToken.setToken(token);
         verificationToken.setRequestTime(now);
+        verificationToken.setIsUsed(Boolean.FALSE);
         verificationToken.setExpirationTime(now.plusSeconds(expirationTime));
         return this.tokenRepository.save(verificationToken);
     }

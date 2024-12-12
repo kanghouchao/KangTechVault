@@ -21,7 +21,7 @@ import java.util.Locale;
 @RequiredArgsConstructor
 public class JavaEmailSenderService implements EmailService {
 
-    @Value("${register.email.verify.url}")
+    @Value("${register.email.verify-baseurl}")
     private String baseURL;
 
     private final JavaMailSender javaMailSender;
