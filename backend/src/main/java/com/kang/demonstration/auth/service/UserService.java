@@ -1,5 +1,7 @@
 package com.kang.demonstration.auth.service;
 
+import com.kang.demonstration.auth.entity.User;
+
 /**
  * @author kanghouchao
  */
@@ -11,4 +13,6 @@ public interface UserService {
      * @return
      */
     boolean existsByEmail(String email);
+
+    User createNewUser(String email, String password);
 }

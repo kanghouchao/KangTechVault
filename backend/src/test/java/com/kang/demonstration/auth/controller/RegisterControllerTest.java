@@ -11,8 +11,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.assertj.MockMvcTester;
 
-import java.util.Locale;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
@@ -22,7 +20,7 @@ import static org.mockito.Mockito.verify;
 /**
  * @author kanghouchao
  */
-@SpringBootTest()
+@SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
 public class RegisterControllerTest {
@@ -38,13 +36,13 @@ public class RegisterControllerTest {
         final String request = "{\"email\": \"kanhouchou@gmail.com\"}";
 
         assertThat(this.mockMvcTester.post()
-            .uri("/register/send-email")
+            .uri("/register")
             .contentType(MediaType.APPLICATION_JSON)
             .content(request)
         ).hasStatusOk().hasBodyTextEqualTo("");
 
         verify(registerService, times(1))
-            .sendEmail(eq("kanhouchou@gmail.com"), eq(Locale.JAPAN));
+            .sendEmail(eq("kanhouchou@gmail.com"));
     }
 
     @Test
@@ -52,14 +50,14 @@ public class RegisterControllerTest {
         final String request = "{\"email\": \"\"}";
 
         assertThat(this.mockMvcTester.post()
-            .uri("/register/send-email")
+            .uri("/register")
             .contentType(MediaType.APPLICATION_JSON)
             .content(request)
         ).hasStatus(HttpStatus.BAD_REQUEST)
             .hasBodyTextEqualTo("{\"message\":null,\"validationErrors\":[{\"field\":\"email\",\"message\":\"空白は許可されていません\"}]}");
 
         verify(registerService, times(0))
-            .sendEmail(any(), any());
+            .sendEmail(any());
     }
 
     @Test
@@ -67,14 +65,14 @@ public class RegisterControllerTest {
         final String request = "{\"email\": \"this is not a valid email\"}";
 
        assertThat(this.mockMvcTester.post()
-            .uri("/register/send-email")
+            .uri("/register")
             .contentType(MediaType.APPLICATION_JSON)
             .content(request)
         ).hasStatus(HttpStatus.BAD_REQUEST)
             .hasBodyTextEqualTo("{\"message\":null,\"validationErrors\":[{\"field\":\"email\",\"message\":\"電子メールアドレスとして正しい形式にしてください\"}]}");
 
         verify(registerService, times(0))
-            .sendEmail(any(), any());
+            .sendEmail(any());
     }
 
 }

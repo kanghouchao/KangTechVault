@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotBlank;
  * @author kanghouchao
  */
 public record PasswordSettingRequest(@Email @NotBlank String email,
+                                     @NotBlank String token,
                                      @NotBlank String password,
                                      @NotBlank String passwordConfirm) {
 }

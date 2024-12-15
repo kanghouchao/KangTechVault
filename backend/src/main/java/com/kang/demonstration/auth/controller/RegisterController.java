@@ -1,6 +1,8 @@
 package com.kang.demonstration.auth.controller;
 
+import com.kang.demonstration.auth.entity.User;
 import com.kang.demonstration.auth.model.EmailSenderRequest;
+import com.kang.demonstration.auth.model.PasswordSettingRequest;
 import com.kang.demonstration.auth.service.RegisterService;
 import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
@@ -12,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Locale;
-
 /**
  * @author kanghouchao
  */
@@ -21,7 +21,7 @@ import java.util.Locale;
 @Log4j2
 @RestController
 @AllArgsConstructor
-@RequestMapping("register")
+@RequestMapping
 public class RegisterController {
 
     private final RegisterService registerService;
@@ -32,11 +32,16 @@ public class RegisterController {
      * @param emailSenderRequest user's email
      * @return response
      */
-    @PostMapping("send-email")
-    public ResponseEntity<?> sendEmail(@RequestBody @Valid EmailSenderRequest emailSenderRequest,
-                                       Locale locale) throws MessagingException {
-        this.registerService.sendEmail(emailSenderRequest.email(), locale);
+    @PostMapping("register")
+    public ResponseEntity<?> register(@RequestBody @Valid EmailSenderRequest emailSenderRequest) throws MessagingException {
+        this.registerService.sendEmail(emailSenderRequest.email());
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("create-user")
+    public ResponseEntity<Long> createNewUser(@Valid @RequestBody PasswordSettingRequest request) {
+        final User user = this.registerService.createNewUser(request.email(), request.token(), request.password());
+        return ResponseEntity.ok(user.getId());
     }
 
 }

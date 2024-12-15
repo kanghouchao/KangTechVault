@@ -14,4 +14,6 @@ public interface EmailVerificationTokenService {
      * @param token
      */
     EmailVerificationToken createNewToken(String email, String token);
+
+    EmailVerificationToken findByToken(String token);
 }

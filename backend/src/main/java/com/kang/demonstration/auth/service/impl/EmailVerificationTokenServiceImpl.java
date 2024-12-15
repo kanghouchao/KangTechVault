@@ -34,4 +34,9 @@ public class EmailVerificationTokenServiceImpl implements EmailVerificationToken
         verificationToken.setExpirationTime(now.plusSeconds(expirationTime));
         return this.tokenRepository.save(verificationToken);
     }
+
+    @Override
+    public EmailVerificationToken findByToken(String token) {
+        return this.tokenRepository.findByToken(token);
+    }
 }
