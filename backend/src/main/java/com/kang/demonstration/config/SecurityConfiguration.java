@@ -1,16 +1,16 @@
 package com.kang.demonstration.config;
 
+import com.kang.demonstration.auth.unit.TokenProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
  * @author kanghouchao
@@ -18,10 +18,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 public class SecurityConfiguration {
 
-    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final TokenAuthenticationFilter tokenAuthenticationFilter;
 
-    public SecurityConfiguration(JwtAuthenticationFilter jwtAuthenticationFilter) {
-        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+    public SecurityConfiguration(TokenAuthenticationFilter tokenAuthenticationFilter) {
+        this.tokenAuthenticationFilter = tokenAuthenticationFilter;
     }
 
     @Bean
@@ -31,14 +31,14 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        String[] allowedPaths = {"/register/**", "/login/**", "/error"};
+        String[] allowedPaths = {"/register", "/login", "/error", "/create-user"};
         http
             .csrf(csrf -> csrf
                 .ignoringRequestMatchers("/**")
             ).authorizeHttpRequests(authorize -> authorize
                 .requestMatchers(allowedPaths).permitAll()
                 .anyRequest().authenticated())
-            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+            .addFilterBefore(tokenAuthenticationFilter, LoginAuthenticationFilter.class)
             .sessionManagement(session -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             );
@@ -46,9 +46,13 @@ public class SecurityConfiguration {
     }
 
     @Bean
+    public LoginAuthenticationFilter jwtAuthenticationFilter(TokenProvider tokenProvider, HttpSecurity http) throws Exception {
+        return new LoginAuthenticationFilter(new AntPathRequestMatcher("/login", "POST"), tokenProvider, authenticationManager(http));
+    }
+
+    @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
-        AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
-        return authenticationManagerBuilder.build();
+        return http.getSharedObject(AuthenticationManagerBuilder.class).build();
     }
 
 }
