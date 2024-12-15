@@ -54,9 +54,7 @@ public class User implements UserDetails {
     private boolean isEmailVerified = false;
 
     @Column(updatable = false)
-    private LocalDateTime createdAt;
-
-    private LocalDateTime updatedAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
