@@ -1,7 +1,6 @@
-package com.kang.demonstration.config;
+package com.kang.demonstration.exception;
 
-import com.kang.demonstration.auth.exception.EmailAlreadyRegisteredException;
-import jakarta.mail.MessagingException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -16,6 +15,7 @@ import java.util.stream.Collectors;
 /**
  * @author kanghouchao
  */
+@Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -32,14 +32,16 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(new ErrorMessage(null, validationErrors), HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(EmailAlreadyRegisteredException.class)
-    public ResponseEntity<?> emailAlreadyRegistered(EmailAlreadyRegisteredException e) {
+    @ExceptionHandler(ServiceException.class)
+    public ResponseEntity<?> emailAlreadyRegistered(ServiceException e) {
+        log.error(e.getMessage(), e);
         return new ResponseEntity<>(new ErrorMessage(e.getMessage(), null), HttpStatus.CONFLICT);
     }
 
-    @ExceptionHandler(MessagingException.class)
-    public ResponseEntity<?> handleGenericException(MessagingException e) {
-        return new ResponseEntity<>(new ErrorMessage(e.getMessage(), null), HttpStatus.INTERNAL_SERVER_ERROR);
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<?> handleGenericException(Exception e) {
+        log.error(e.getMessage(), e);
+        return new ResponseEntity<>(new ErrorMessage(null, null), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     record ErrorMessage(String message,
