@@ -1,7 +1,7 @@
 # KangTechVault
 
 ## 概要
-KangTechVaultは、Java、VUE、DevOpsに関連する技術を総合的に展示するためのプロジェクトです。このプロジェクトは、バックエンド、フロントエンド、およびAWSクラウドインフラを使ったIaC（Infrastructure as Code）の実践を含んでいます。
+KangTechVaultは、Java、React、DevOpsに関連する技術を総合的に展示するためのプロジェクトです。このプロジェクトは、バックエンド、フロントエンド、およびAWSクラウドインフラを使ったIaC（Infrastructure as Code）の実践を含んでいます。
 
 ## プロジェクト構成
 
