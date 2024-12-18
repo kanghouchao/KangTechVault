@@ -1,5 +1,3 @@
-version: '3.7'
-
 services:
   traefik:
     image: traefik:v3.3.0-rc1
@@ -26,16 +24,19 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/${DATABASE_NAME}
       SPRING_DATASOURCE_USERNAME: ${MYSQL_USERNAME}
       SPRING_DATASOURCE_PASSWORD: ${MYSQL_PASSWORD}
-      SPRINGBOOT_PROFILE: ${SPRINGBOOT_PROFILE}
       LOGIN_TOKEN_EXPIRATION_TIME_MILLIS: ${LOGIN_TOKEN_EXPIRATION_TIME_MILLIS}
       REGISTER_EMAIL_VERIFY_BASEURL: ${REGISTER_EMAIL_VERIFY_BASEURL}
       REGISTER_TOKEN_TIME: ${REGISTER_TOKEN_TIME}
+      SPRING_MAIL_USERNAME: ${SPRING_MAIL_USERNAME}
+      SPRING_MAIL_PASSWORD: ${SPRING_MAIL_PASSWORD}
     depends_on:
       - db
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.api.rule=Host(`kang-vault.com`) && PathPrefix(`/api`)"
       - "traefik.http.services.api.loadbalancer.server.port=80"
+      - "traefik.http.middlewares.api-stripprefix.stripprefix.prefixes=/api"
+      - "traefik.http.routers.api.rule=Host(`kang-vault.com`) && PathPrefix(`/api`)"
+      - "traefik.http.routers.api.middlewares=api-stripprefix"
   db:
     image: mysql:8.4.2
     environment:
